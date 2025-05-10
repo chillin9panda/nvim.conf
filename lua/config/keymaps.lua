@@ -12,3 +12,6 @@ for _, mode in ipairs({ "n", "i", "v" }) do
   vim.keymap.set(mode, "<Left>", "<Nop>", { desc = "Disable Left Arrow" })
   vim.keymap.set(mode, "<Right>", "<Nop>", { desc = "Disable Right Arrow" })
 end
+
+-- Disable mouse
+vim.o.mouse = ""
