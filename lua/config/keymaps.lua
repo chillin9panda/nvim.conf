@@ -15,3 +15,5 @@ end
 
 -- Disable mouse
 vim.o.mouse = ""
+
+-- Swap caps-lock and esc
