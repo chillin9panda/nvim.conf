@@ -19,5 +19,5 @@ git clone https://github.com/chillin9panda/nvim.conf.git ~/.config/nvim
 
 ## Mason Packages
 ```bash
-MasonInstall black bash-language-server clang-format clangd cmake-language-server cssls eslint_d google-java-format html-lsp htmlhint intelephense jdtls lua-language-server php-cs-fixer prettier pylsp shfmt somesass_ls stylua stylelint typescript-language-server
+MasonInstall black bash-language-server clang-format clangd cmake-language-server css-lsp eslint_d google-java-format html-lsp htmlhint intelephense jdtls lua-language-server php-cs-fixer prettier python-lsp-server shfmt some-sass-language-server stylua stylelint typescript-language-server
 ```
