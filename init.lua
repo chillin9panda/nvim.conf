@@ -1,6 +1,4 @@
-require("config.options")
-require("config.lazy")
-
+require("config.require")
 
 -- TODOs
 -- 1. custom dashboard
