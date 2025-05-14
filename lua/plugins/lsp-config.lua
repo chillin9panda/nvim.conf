@@ -16,6 +16,7 @@ return {
           "bashls",
           "jdtls",
           "intelephense",
+          "pylsp",
           -- Add as needed
         }
       })
