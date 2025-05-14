@@ -9,6 +9,5 @@ vim.cmd("set shiftwidth=2")
 
 -- Clipboard sharing
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+  vim.opt.clipboard = "unnamedplus"
 end)
-
