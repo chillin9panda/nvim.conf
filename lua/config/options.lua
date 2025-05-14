@@ -1,5 +1,8 @@
 -- Line number
 vim.opt.number = true
+vim.opt.relativenumber = true
+
+vim.opt.fillchars:append({ eob = " " })
 
 --Tab
 vim.cmd("set expandtab")
@@ -9,5 +12,5 @@ vim.cmd("set shiftwidth=2")
 
 -- Clipboard sharing
 vim.schedule(function()
-  vim.opt.clipboard = "unnamedplus"
+	vim.opt.clipboard = "unnamedplus"
 end)
