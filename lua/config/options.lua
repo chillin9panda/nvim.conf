@@ -14,3 +14,5 @@ vim.cmd("set shiftwidth=2")
 vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus"
 end)
+
+vim.opt.undofile = true
