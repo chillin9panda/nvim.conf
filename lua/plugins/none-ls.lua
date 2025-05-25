@@ -12,9 +12,9 @@ return {
       sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.shfmt,
-        require("none-ls.diagnostics.eslint_d"),
+        --require("none-ls.diagnostics.eslint_d"),
         null_ls.builtins.formatting.prettier,
-        null_ls.builtins.diagnostics.stylelint,
+        -- null_ls.builtins.diagnostics.stylelint,
         null_ls.builtins.formatting.stylelint,
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.phpcsfixer,
