@@ -5,3 +5,6 @@ for _, mode in ipairs({ "n", "i", "v" }) do
   vim.keymap.set(mode, "<Left>", "<Nop>", { desc = "Disable Left Arrow" })
   vim.keymap.set(mode, "<Right>", "<Nop>", { desc = "Disable Right Arrow" })
 end
+
+vim.opt.hlsearch = true
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
