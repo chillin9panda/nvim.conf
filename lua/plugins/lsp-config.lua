@@ -19,33 +19,33 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.jdtls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.clangd.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.ts_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.intelephense.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.bashls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.html.setup({
-				capabilities = capabilities,
-			})
-			-- Add as needed
+			local on_attach = function(_, bufnr)
+				local opts = { buffer = bufnr }
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, {}, opts)
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, {}, opts)
+				vim.keymap.set({ "n" }, "<leader>ca", vim.lsp.buf.code_action, {}, opts)
+			end
 
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-			vim.keymap.set({ "n" }, "<leader>ca", vim.lsp.buf.code_action, {})
+			local lspconfig = require("lspconfig")
+			local servers = {
+				"lua_ls",
+				"jdtls",
+				"clangd",
+				"ts_ls",
+				"intelephense",
+				"bashls",
+				"html",
+				"csharp_ls",
+
+				-- Add as needed
+			}
+
+			for _, server in ipairs(servers) do
+				lspconfig[server].setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+				})
+			end
 		end,
 	},
 }
