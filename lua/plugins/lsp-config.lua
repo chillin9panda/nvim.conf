@@ -32,7 +32,6 @@ return {
         end,
       })
 
-      local lspconfig = require("lspconfig")
       local servers = {
         "lua_ls",
         -- "jdtls",
@@ -42,14 +41,23 @@ return {
         "bashls",
         "html",
         "csharp_ls",
-
-        -- Add as needed
+        "kotlin_language_server",
       }
 
-      for _, server in ipairs(servers) do
-        lspconfig[server].setup({
-          capabilities = capabilities,
-        })
+      if vim.lsp.config then
+        for _, server in ipairs(servers) do
+          vim.lsp.config(server, {
+            capabilities = capabilities,
+          })
+          vim.lsp.enable(server)
+        end
+      else
+        local lspconfig = require("lspconfig")
+        for _, server in ipairs(servers) do
+          lspconfig[server].setup({
+            capabilities = capabilities,
+          })
+        end
       end
     end,
   },
