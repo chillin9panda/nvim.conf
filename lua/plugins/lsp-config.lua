@@ -33,8 +33,6 @@ return {
       })
 
       local servers = {
-        "lua_ls",
-        -- "jdtls",
         "clangd",
         "ts_ls",
         "intelephense",
@@ -42,12 +40,20 @@ return {
         "html",
         "csharp_ls",
         "kotlin_language_server",
+        "asm_lsp",
       }
+
+      local on_attach = function(client, bufnr)
+        if client.server_capabilities.inlayHintProvider then
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
+      end
 
       if vim.lsp.config then
         for _, server in ipairs(servers) do
           vim.lsp.config(server, {
             capabilities = capabilities,
+            on_attach = on_attach,
           })
           vim.lsp.enable(server)
         end
@@ -56,6 +62,7 @@ return {
         for _, server in ipairs(servers) do
           lspconfig[server].setup({
             capabilities = capabilities,
+            on_attach = on_attach,
           })
         end
       end
