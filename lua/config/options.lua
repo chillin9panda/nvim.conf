@@ -3,6 +3,8 @@ vim.opt.timeoutlen = 300
 
 vim.opt.hlsearch = true
 
+vim.o.signcolumn = "yes"
+
 -- Line number
 vim.opt.number = true
 vim.opt.relativenumber = true
