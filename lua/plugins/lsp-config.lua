@@ -39,7 +39,6 @@ return {
         "bashls",
         "html",
         "csharp_ls",
-        "kotlin_language_server",
         "asm_lsp",
       }
 
