@@ -44,6 +44,7 @@ return {
         "html",
         "csharp_ls",
         "asm_lsp",
+        "gradle_ls",
       }
 
       local on_attach = function(client, bufnr)
