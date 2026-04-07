@@ -5,6 +5,15 @@ return {
     config = function()
       require("mason").setup()
     end,
+    opts = {
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗"
+        }
+      }
+    }
   },
   {
     "mason-org/mason-lspconfig.nvim",
@@ -14,13 +23,13 @@ return {
     },
   },
   {
-    "neovim/nvim-lspconfig",
+    'https://github.com/neovim/nvim-lspconfig',
     lazy = false,
     config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local bufnr = args.buf
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
           local opts = { buffer = bufnr }
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -29,10 +38,12 @@ return {
           vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
           vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
           vim.keymap.set("n", "<leader>q", function()
-              vim.diagnostic.setqflist({ open = true })
-            end,
-            opts
-          )
+            vim.diagnostic.setqflist({ open = true })
+          end, opts)
+
+          if client and client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+          end
         end,
       })
 
@@ -47,29 +58,16 @@ return {
         "gradle_ls",
       }
 
-      local on_attach = function(client, bufnr)
-        if client.server_capabilities.inlayHintProvider then
-          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-        end
-      end
+      local has_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+      local capabilities = has_cmp and cmp_lsp.default_capabilities() or {}
 
-      if vim.lsp.config then
-        for _, server in ipairs(servers) do
-          vim.lsp.config(server, {
-            capabilities = capabilities,
-            on_attach = on_attach,
-          })
-          vim.lsp.enable(server)
-        end
-      else
-        local lspconfig = require("lspconfig")
-        for _, server in ipairs(servers) do
-          lspconfig[server].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-          })
-        end
+      for _, server in ipairs(servers) do
+        vim.lsp.config(server, {
+          capabilities = capabilities,
+        })
+        vim.lsp.enable(server)
       end
-    end,
-  },
+    end
+
+  }
 }
