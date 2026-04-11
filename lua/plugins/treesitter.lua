@@ -11,7 +11,7 @@ return {
 
     ts.install({
       "python", "bash", "cpp", "c_sharp", "css", "javascript", "typescript",
-      "tsx", "jsx",
+      "tsx", "jsx", "ini", "ssh_config", "git_config",
       "php", "java", "kotlin", "lua", "cmake", "scss",
       "xml", "html", "yaml", "json", "markdown", "markdown_inline",
       -- Neovim internal essentials
@@ -29,20 +29,11 @@ return {
         local ft = vim.bo[bufnr].filetype
         local lang = vim.treesitter.language.get_lang(ft) or ft
 
-        local ok, _ = pcall(vim.treesitter.get_parser, bufnr, lang)
-        if ok then
-          vim.treesitter.start(bufnr)
-        end
-      end,
-    })
+        local has_lang = pcall(vim.treesitter.language.add, lang)
 
-    vim.api.nvim_create_autocmd('FileType', {
-      callback = function(args)
-        local bufnr = args.buf
-        if vim.bo[bufnr].buftype == "" then
-          local ft = vim.bo[bufnr].filetype
-          local lang = vim.treesitter.language.get_lang(ft) or ft
-          if pcall(vim.treesitter.get_parser, bufnr, lang) then
+        if has_lang then
+          local ok, _ = pcall(vim.treesitter.get_parser, bufnr, lang)
+          if ok then
             vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
           end
         end
