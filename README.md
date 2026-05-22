@@ -1,5 +1,9 @@
 # **_Neovim_**
 
+nvim 0.12  
+requires `tree-sitter-cli`  
+  
+
 ## Create backup of existing config
 
 ```bash
