@@ -21,29 +21,15 @@ return {
       callback = function(args)
         local bufnr = args.buf
 
-        if vim.bo[bufnr].buftype ~= "" then
-          return
-        end
+        if vim.bo[bufnr].buftype ~= "" then return end
 
         local ft = vim.bo[bufnr].filetype
         local lang = vim.treesitter.language.get_lang(ft) or ft
 
-        local ok, _ = pcall(vim.treesitter.get_parser, bufnr, lang)
-        if ok then
-          vim.treesitter.start(bufnr)
-        end
-      end,
-    })
+        if pcall(vim.treesitter.language.add, lang) then
+          vim.treesitter.start(bufnr, lang)
 
-    vim.api.nvim_create_autocmd('FileType', {
-      callback = function(args)
-        local bufnr = args.buf
-        if vim.bo[bufnr].buftype == "" then
-          local ft = vim.bo[bufnr].filetype
-          local lang = vim.treesitter.language.get_lang(ft) or ft
-          if pcall(vim.treesitter.get_parser, bufnr, lang) then
-            vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end
+          vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
       end,
     })
