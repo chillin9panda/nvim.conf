@@ -11,10 +11,10 @@ return {
 
     ts.install({
       "python", "bash", "cpp", "c_sharp", "css", "javascript", "typescript",
+      "jsx", "tsx", "ini", "ssh_config", "git_config", "gitcommit", "properties", "sql",
       "php", "java", "kotlin", "lua", "cmake", "scss",
       "xml", "html", "yaml", "json", "markdown", "markdown_inline",
-      -- Neovim internal essentials
-      "vim", "vimdoc", "query", "regex", "lua"
+      "vim", "vimdoc", "query", "regex"
     })
 
     vim.api.nvim_create_autocmd('FileType', {
