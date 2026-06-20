@@ -11,7 +11,7 @@ return {
 
     ts.install({
       "python", "bash", "cpp", "c_sharp", "css", "javascript", "typescript", "jsx", "tsx",
-      "ini", "ssh_config", "git_config", "gitcommit", "properties", "gitignore",
+      "ini", "ssh_config", "git_config", "gitcommit", "properties", "gitignore", "tmux",
       "sql", "php", "java", "kotlin", "lua", "cmake", "scss",
       "xml", "html", "yaml", "json", "markdown", "markdown_inline",
       "vim", "vimdoc", "query", "regex"
