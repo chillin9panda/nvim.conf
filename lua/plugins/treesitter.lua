@@ -33,7 +33,7 @@ return {
             vim.bo[bufnr].cindent = true
             vim.bo[bufnr].cinoptions = "g0,:0,(0,U1"
           else
-            vim.bo[bufnr].indentexpr = "v:lua.vim.treesitter.indent.get_indent()"
+            vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
           end
         end
       end,
