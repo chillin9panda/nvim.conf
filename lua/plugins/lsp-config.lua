@@ -38,11 +38,20 @@ return {
           vim.keymap.set("n", "<leader>q", function()
             vim.diagnostic.setqflist({ open = true })
           end, opts)
-
-          if client and client.server_capabilities.inlayHintProvider then
+          if client then
             vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
           end
         end,
+      })
+
+      vim.lsp.config("jdtls", {
+        settings = {
+          java = {
+            inlayHints = {
+              parameterNames = { enabled = "all" },
+            },
+          },
+        },
       })
 
       local servers = {
@@ -54,6 +63,7 @@ return {
         "csharp_ls",
         "asm_lsp",
         "gradle_ls",
+        "jdtls",
       }
 
       local has_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
